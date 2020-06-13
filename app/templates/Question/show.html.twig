@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}
+    {{ 'title_question_details'|trans({'%id%': question.id|default('')}) }}
+{% endblock %}
+{% block body %}
+    <h1>{{ 'title_view_record'|trans({'%id%': question.id|default('')}) }}</h1>
+    {% if question is defined and question|length %}
+        <dl class="dl-horizontal">
+            <dt>{{ 'label_id'|trans }}</dt>
+            <dd>{{ question.id }}</dd>
+            <dt>{{ 'label_created_at'|trans }}</dt>
+            <dd>{{ question.createdAt|format_date('long') }}</dd>
+            <dt>{{ 'label_title'|trans }}</dt>
+            <dd>{{  question.title }}</dd>
+            <dt>{{ 'label_content'|trans }}</dt>
+            <dd>{{  question.text }}</dd>
+            <dt>{{ 'label_category'|trans }}</dt>
+            <dd>{{ question.category.title }}</dd>
+
+        </dl>
+      <div class="answer">
+            <h3>{{ 'title_answer'|trans }}</h3>
+        {#           {% if is_granted('ROLE_USER') %}
+                   <a class="btn btn-primary" href={{ url('add_answer', {"id": question.id})}} >skomentuj</a>
+
+                  {% endif %}
+
+                  {% if question.answers|length %}
+                      <ul class="mt-4 media-list">
+                          {% for answer in question.answers %}
+                              <li class="media">
+                                  <div class="media-body">
+
+                                      <p class="mt-2">{{ answer.text }}</p>
+                                      {% if is_granted("ROLE_ADMIN") or is_granted("DELETE", comment) %}
+                                          <a class="btn btn-outline-danger float-right" href={{ url('answer_delete', {"id": answer.id}) }}>delete</a>
+                                      {% endif %}
+                                      <hr>
+                               </div>
+                              </li>
+                          {% endfor %}
+                      </ul>
+                  {% endif %}#}
+
+
+                   {% if is_granted('ROLE_USER') %}
+                        <div class="container">
+                            <h5>{{ 'title_answer_new'|trans }}</h5>
+                            {{ form_start(form, { method: 'POST', action: url('add_answer', {id: question.getId()}) }) }}
+                            {{ form_widget(form) }}
+                            <div class="form-group row float-sm-right">
+                                <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-primary" />
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    {% endif %}
+
+                    <div style="margin-top: 4%">
+                        {% if question.getAnswer()|length %}
+                            {% for answer in question.getAnswer() %}
+                                <div style="border-style: groove">
+
+                                    <p>{{ answer.createdAt|date('Y/m/d') }}</p>
+                                    <p>{{ answer.getText() }}</p>
+
+                                    {% if is_granted('MANAGE', comment) %}
+                                        <a href="{{ url('answer_delete', {'id':answer.id}) }}">{{ 'label_delete'|trans }}</a>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+        <p>
+            <a href="{{ url('Question_index') }}" title="{{ 'action_back_to_list'|trans }}">
+                {{ 'action_back_to_list'|trans }}
+            </a>
+        </p>
+    {% else %}
+        {% include 'default/_single_flash_message.html.twig' with {
+            type: 'warning',
+            message: 'message_record_not_found'|trans
+        } %}
+    {% endif %}
+{% endblock %}
