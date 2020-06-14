@@ -6,12 +6,8 @@
 namespace App\Controller;
 
 use App\Entity\Question;
-use App\Entity\Answer;
-use App\Entity\User;
 use App\Form\QuestionType;
-use App\Form\AnswerType;
 use App\Service\QuestionService;
-use App\Service\AnswerService;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -33,7 +29,7 @@ class QuestionController extends AbstractController
      */
     private $QuestionService;
 
-    private $AnswerService;
+
 
 
     /**
@@ -41,10 +37,10 @@ class QuestionController extends AbstractController
      *
      * @param \App\Service\QuestionService $QuestionService Question service
      */
-    public function __construct(QuestionService $QuestionService,AnswerService $AnswerService)
+    public function __construct(QuestionService $QuestionService)
     {
         $this->QuestionService = $QuestionService;
-        $this->AnswerService = $AnswerService;
+
 
     }
 
@@ -222,99 +218,5 @@ class QuestionController extends AbstractController
             ]
         );
     }
-    /**
-     * Delete Answer.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Entity\Answer                       $answer Answer entity
-     * @param $id
-     *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @Route(
-     *     "/{id}/deleteanswer",
-     *     methods={"GET", "DELETE"},
-     *     name="answer_delete"
-     * )
-     * @IsGranted("ROLE_ADMIN")
-     *
-     */
-    public function deleteAnswer(Request $request, Answer $answer, $id): Response
-    {
-        $form = $this->createForm(FormType::class, $answer, ['method' => 'DELETE']);
-        $form->handleRequest($request);
-
-        //$question = $questionRepository->find($id); // szuka id książki
-        $question = $this->QuestionService->findQuestionId($id);
-
-        if ($request->isMethod('DELETE') && !$form->isSubmitted()) {
-            $form->submit($request->request->get($form->getName()));
-        }
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            //$answerRepository->delete($answer);
-            $this->AnswerService->delete($answer);
-
-            $this->addFlash('success', 'message_deleted_successfully');
-
-            return $this->redirectToRoute('Question_show', ['id' => $answer->getQuestion()->getId()]); // dzięki temu wie gdzie wrócić
-        }
-
-        return $this->render(
-            'Question/delete_answer.html.twig',
-            [
-                'form' => $form->createView(),
-                'answer' => $answer,
-                'question' => $question,
-            ]
-        );
-    }
-
-    /**
-     * Add Answer.
-     *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param $id
-     *
-     * @return \Symfony\Component\HttpFoundation\Response HTTP response
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     * @Route(
-     *     "/{id}",
-     *     methods={"GET", "POST"},
-     *     name="add_answer",
-     * )
-     */
-    public function addAnswer(Request $request, $id): Response
-    {
-        $answer = new Answer();
-        $form = $this->createForm(AnswerType::class, $answer);
-        $form->handleRequest($request);
-
-        //$question = $questionRepository->find($id);
-        $question = $this->QuestionService->findQuestionId($id);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $answer->setQuestion($question);
-           //* $answer->setUser($this->getUser());*/
-            //$answerRepository->save($answer);
-            $this->AnswerService->save($answer);
-
-            return $this->redirectToRoute('Question_show', ['id' => $answer->getQuestion()->getId()]); //żeby wiedzieć pod jakie id wrócić
-        }
-
-        return $this->render(
-            'Question/show.html.twig',
-            [
-                'form' => $form->createView(),
-                'answer' => $answer,
-                'question' => $question,
-            ]
-        );
-    }
-
 
 }
