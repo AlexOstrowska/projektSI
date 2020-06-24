@@ -7,16 +7,15 @@ namespace App\Form;
 
 use App\Entity\Answer;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
 
 /**
- * Class AnswerType.
+ * Class FavouriteType.
  */
-class AnswerType extends AbstractType
+class FavouriteType extends AbstractType
 {
     /**
      * Builds the form.
@@ -27,35 +26,14 @@ class AnswerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options):void
     {
         $builder->add(
-            'text',
-            TextareaType::class,
+            'favourite',
+            ChoiceType::class,
             [
-                'label' => 'label_answer',
-                'required' => true,
-                'attr' => ['max_length' => 255],
-            ]
+            'choices'  => [
+                'Najlepszy?' => '1',
+                'Nie najlepszy?' => '0',
+            ]]
         );
-
-        $builder->add(
-            'email',
-            EmailType::class,
-            [
-                'label' => 'label_email',
-                'required' => true,
-                'attr' => ['max_length' => 180],
-            ]
-        );
-        $builder->add(
-            'name',
-            TextareaType::class,
-            [
-                'label' => 'label_name',
-                'required' => true,
-                'attr' => ['max_length' => 64],
-            ]
-        );
-
-
     }
 
     /**

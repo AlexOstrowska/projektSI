@@ -7,6 +7,7 @@ namespace App\Form;
 
 use App\Entity\Category;
 use App\Entity\Question;
+use App\Form\DataTransformer\TagsDataTransformer;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -19,6 +20,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class QuestionType extends AbstractType
 {
+    /**
+     * Tags data transformer.
+     *
+     * @var \App\Form\DataTransformer\TagsDataTransformer
+     */
+    private $tagsDataTransformer;
+
+    /**
+     * BookType constructor.
+     *
+     * @param \App\Form\DataTransformer\TagsDataTransformer $tagsDataTransformer Tags data transformer
+     */
+    public function __construct(TagsDataTransformer $tagsDataTransformer)
+    {
+        $this->tagsDataTransformer = $tagsDataTransformer;
+    }
     /**
      * Builds the form.
      *
@@ -63,6 +80,19 @@ class QuestionType extends AbstractType
                 'label' => 'label_create_content',
                 'required' => true,
             ]
+        );
+        $builder->add(
+            'tag',
+            TextType::class,
+            [
+                'label' => 'label_tag',
+                'required' => false,
+                'attr' => ['max_length' => 64],
+            ]
+        );
+
+        $builder->get('tag')->addModelTransformer(
+            $this->tagsDataTransformer
         );
     }
 

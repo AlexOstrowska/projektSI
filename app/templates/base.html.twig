@@ -11,26 +11,27 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light ">
-    <a class="navbar-brand" href="#">Q&A</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <a class="navbar-brand">Q&A</a>
     <div class="collapse navbar-collapse">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href={{ url('Question_index') }}>Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href={{ url('Question_index') }}>Pytania<span class="sr-only">(current)</span></a>
             </li>
             {% if is_granted('ROLE_ADMIN') %}
                 <li class="nav-item">
                     <a class="nav-link" href={{ url('Question_create') }}>Dodaj Pytanie</a>
                 </li>
-            {% endif %}
-            <li class="nav-item">
-                <a class="nav-link" href={{ url('category_index') }}>Kategorie</a>
-            </li>
-            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item">
+                    <a class="nav-link" href={{ url('category_index') }}>Kategorie</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href={{ url('category_create') }}>Dodaj Kategorie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href={{ url('tag_index') }}>Tagi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('user_index') }}">{{ 'title_user_index'|trans }} </a>
                 </li>
             {% endif %}
             {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}

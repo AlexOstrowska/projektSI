@@ -18,61 +18,44 @@
             <dd>{{  question.text }}</dd>
             <dt>{{ 'label_category'|trans }}</dt>
             <dd>{{ question.category.title }}</dd>
+            <dt>{{ 'label_tag'|trans }}</dt>
+            <dd>
+                {% for tag in question.getTag() %}
+                    {{ tag.title }}
+                {% endfor %}
+            </dd>
 
         </dl>
       <div class="answer">
             <h3>{{ 'title_answer'|trans }}</h3>
-        {#           {% if is_granted('ROLE_USER') %}
-                   <a class="btn btn-primary" href={{ url('add_answer', {"id": question.id})}} >skomentuj</a>
 
-                  {% endif %}
+                   <a class="btn btn-primary" href={{ url('add_answer', {"id": question.id})}} >Dodaj odpowiedz</a>
 
                   {% if question.answers|length %}
+
                       <ul class="mt-4 media-list">
                           {% for answer in question.answers %}
                               <li class="media">
                                   <div class="media-body">
 
+                                      <p class="mt-2">{{ answer.email }}</p>
+                                      <p class="mt-2">{{ answer.name }}</p>
                                       <p class="mt-2">{{ answer.text }}</p>
-                                      {% if is_granted("ROLE_ADMIN") or is_granted("DELETE", comment) %}
-                                          <a class="btn btn-outline-danger float-right" href={{ url('answer_delete', {"id": answer.id}) }}>delete</a>
+
+                                      {% if is_granted("ROLE_ADMIN") or is_granted("DELETE", answer) %}
+                                          <a class="btn btn-outline-danger float-right" href={{ url('answer_delete', {"id": answer.id}) }}>Usuń</a>
+                                          <a class="btn btn-outline-dark float-right" href={{ url('answer_edit', {"id": answer.id}) }}>Dodaj do ulubionych</a>
                                       {% endif %}
                                       <hr>
                                </div>
                               </li>
+                              </ul>
+
                           {% endfor %}
-                      </ul>
-                  {% endif %}#}
 
+                  {% endif %}
+      </div>
 
-                   {% if is_granted('ROLE_USER') %}
-                        <div class="container">
-                            <h5>{{ 'title_answer_new'|trans }}</h5>
-                            {{ form_start(form, { method: 'POST', action: url('add_answer', {id: question.getId()}) }) }}
-                            {{ form_widget(form) }}
-                            <div class="form-group row float-sm-right">
-                                <input type="submit" value="{{ 'action_save'|trans }}" class="btn btn-primary" />
-                            </div>
-                            {{ form_end(form) }}
-                        </div>
-                    {% endif %}
-
-                    <div style="margin-top: 4%">
-                        {% if question.getAnswer()|length %}
-                            {% for answer in question.getAnswer() %}
-                                <div style="border-style: groove">
-
-                                    <p>{{ answer.createdAt|date('Y/m/d') }}</p>
-                                    <p>{{ answer.getText() }}</p>
-
-                                    {% if is_granted('MANAGE', comment) %}
-                                        <a href="{{ url('answer_delete', {'id':answer.id}) }}">{{ 'label_delete'|trans }}</a>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    </div>
-                </div>
         <p>
             <a href="{{ url('Question_index') }}" title="{{ 'action_back_to_list'|trans }}">
                 {{ 'action_back_to_list'|trans }}

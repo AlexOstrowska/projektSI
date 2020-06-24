@@ -75,9 +75,6 @@ class UserController extends AbstractController
     public function changePassword(Request $request, User $user, UserRepository $repository, UserPasswordEncoderInterface $passwordEncoder): Response
     {
 
-
-
-
         if ($user !== $this->getUser()) {
             $this->addFlash('warning', 'message.forbidden');
 

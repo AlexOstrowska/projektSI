@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="pl" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="Question_create">
+                <source>Question_create</source>
+                <target>Create question</target>
+            </trans-unit>
+
+            <trans-unit id="title_record_list">
+                <source>title_record_list</source>
+                <target>Question list</target>
+            </trans-unit>
+            <trans-unit id="label_id">
+                <source>label_id</source>
+                <target>Id</target>
+            </trans-unit>
+            <trans-unit id="label_title">
+                <source>label_title</source>
+                <target>Tutle</target>
+            </trans-unit>
+            <trans-unit id="label_content">
+                <source>label_content</source>
+                <target>Content</target>
+            </trans-unit>
+            <trans-unit id="label_category">
+                <source>label_category</source>
+                <target>Category</target>
+            </trans-unit>
+            <trans-unit id="label_actions">
+                <source>label_sctions</source>
+                <target>Create</target>
+            </trans-unit>
+
+
+            <trans-unit id="label_add">
+                <source>label_add</source>
+                <target>Add</target>
+            </trans-unit>
+
+            <trans-unit id="label_delete">
+                <source>label_delete</source>
+                <target>Delete</target>
+            </trans-unit>
+
+            <trans-unit id="label_edit">
+                <source>label_edit</source>
+                <target>Edit</target>
+            </trans-unit>
+
+            <trans-unit id="label_show">
+                <source>label_show</source>
+                <target>Show</target>
+            </trans-unit>
+
+            <trans-unit id="message_epmty_list">
+                <source>message_empty_list</source>
+                <target>Empty list</target>
+            </trans-unit>
+
+            <trans-unit id="title_question_details">
+                <source>title_question_details</source>
+                <target>Question details</target>
+            </trans-unit>
+            <trans-unit id="title_view_record">
+                <source>title_view_record</source>
+                <target>View</target>
+            </trans-unit>
+
+            <trans-unit id="title_answer">
+                <source>title_answer</source>
+                <target>Answers</target>
+            </trans-unit>
+
+            <trans-unit id="action_login">
+                <source>action_login</source>
+                <target>Login</target>
+            </trans-unit>
+
+            <trans-unit id="action_back_to_list">
+                <source>action_back_to_list</source>
+                <target>Back to list</target>
+            </trans-unit>
+
+
+            <trans-unit id="message_record_not_found">
+                <source>message_record_not_fount</source>
+                <target>Not found</target>
+            </trans-unit>
+
+            <trans-unit id="title_user_index">
+                <source>title_user_index</source>
+                <target>User</target>
+            </trans-unit>
+
+            <trans-unit id="action_logout">
+                <source>action_logout</source>
+                <target>Logout</target>
+            </trans-unit>
+
+            <trans-unit id="action_create">
+                <source>action_create</source>
+                <target>Create</target>
+            </trans-unit>
+
+            <trans-unit id="title_category_list">
+                <source>title_category_list</source>
+                <target>Category list</target>
+            </trans-unit>
+
+            <trans-unit id="label_updated_at">
+                <source>label_updated_at</source>
+                <target>Updated at</target>
+            </trans-unit>
+
+            <trans-unit id="label_created_at">
+                <source>label_created_at</source>
+                <target>Created at</target>
+            </trans-unit>
+
+            <trans-unit id="title_view_category">
+                <source>title_view_category</source>
+                <target>View category</target>
+            </trans-unit>
+
+            <trans-unit id="label_return_category">
+                <source>label_return_category</source>
+                <target>Back to category list</target>
+            </trans-unit>
+
+            <trans-unit id="message_form_error">
+                <source>message_form_error</source>
+                <target>Error</target>
+            </trans-unit>
+
+            <trans-unit id="action_save">
+                <source>action_save</source>
+                <target>Save</target>
+            </trans-unit>
+
+            <trans-unit id="title_login">
+                <source>title_login</source>
+                <target>Login</target>
+            </trans-unit>
+
+            <trans-unit id="password">
+                <source>password</source>
+                <target>password</target>
+            </trans-unit>
+
+            <trans-unit id="login">
+                <source>login</source>
+                <target>Login</target>
+            </trans-unit>
+
+            <trans-unit id="action.changePassword">
+                <source>action.changePassword</source>
+                <target>Change password</target>
+            </trans-unit>
+
+
+        </body>
+    </file>
+</xliff>

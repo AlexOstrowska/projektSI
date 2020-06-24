@@ -6,6 +6,7 @@
 namespace App\Service;
 
 use App\Entity\Answer;
+use App\Entity\Question;
 use App\Repository\AnswerRepository;
 
 /**
@@ -31,28 +32,50 @@ class AnswerService
     }
 
     /**
+     * Save answer.
+     *
+     * @param Answer $answer
+     * @param Question $question
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function save(Answer $answer, Question $question): void
+    {
+        if($answer instanceof  Answer){
+            if ($question instanceof Question){
+
+
+                    $answer->setQuestion($question);
+                    $this->AnswerRepository->save($answer);
+
+            }
+        }
+    }
+    /**
+     * Save Favanswer.
+     *
+     * @param Answer $answer
+     *
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function saveFav(Answer $answer): void
+    {
+        if($answer instanceof  Answer){
+                $this->AnswerRepository->saveFav($answer);
+        }
+    }
+
+    /**
      * Delete answer.
      *
-     * @param \App\Entity\Answer $answer Answer entity
-     *
+     * @param Answer $answer
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function delete(Answer $answer): void
     {
         $this->AnswerRepository->delete($answer);
-    }
-
-    /**
-     * Save answer.
-     *
-     * @param \App\Entity\Answer $answer Answer entity
-     *
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
-     */
-    public function save(Answer $answer): void
-    {
-        $this->AnswerRepository->save($answer);
     }
 }

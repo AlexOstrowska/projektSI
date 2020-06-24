@@ -7,6 +7,7 @@ namespace App\Service;
 
 use App\Entity\Question;
 use App\Repository\QuestionRepository;
+use App\Service\TagService;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -35,6 +36,12 @@ class QuestionService
      * @var \App\Service\CategoryService
      */
     private $categoryService;
+    /**
+     * Tag service.
+     *
+     * @var \App\Service\TagService
+     */
+    private $tagService;
 
     /**
      * QuestionService constructor.
@@ -43,11 +50,12 @@ class QuestionService
      * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
      * @param \App\Service\CategoryService            $categoryService Category service
      */
-    public function __construct(QuestionRepository $QuestionRepository, PaginatorInterface $paginator, CategoryService $categoryService)
+    public function __construct(QuestionRepository $QuestionRepository, PaginatorInterface $paginator, CategoryService $categoryService, TagService $tagService)
     {
         $this->QuestionRepository = $QuestionRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
+        $this->tagService = $tagService;
     }
 
     /**
@@ -110,6 +118,12 @@ class QuestionService
             );
             if (null !== $category) {
                 $resultFilters['category'] = $category;
+            }
+        }
+        if (isset($filters['tag']) && is_numeric($filters['tag'])) {
+            $tag = $this->tagService->findOneById($filters['tag']);
+            if (null !== $tag) {
+                $resultFilters['tag'] = $tag;
             }
         }
 

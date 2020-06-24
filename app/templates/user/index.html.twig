@@ -5,20 +5,11 @@
 {% endblock %}
 
 {% block body %}
-    {# <h3 class = "text-center">{{ 'title.user'|trans }}</h3>#}
     <h1 class = "text-center">{{ app.user.email }}</h1>
-
-    {#<div class="options text-center">
-        <a href="{{ url('user_index', {id: user.id}) }}" class="btn btn-primary" role="button" title="{{ 'action.changeName'|trans }}">
-            {{ 'action.changeName'|trans }}
-        </a>
-    </div>#}
-
     <br>
     <div class="options text-center">
         <a href="{{ url('user_password', {id: user.id}) }}" class="btn btn-primary" role="button" title="{{ 'action.changePassword'|trans }}">
             {{ 'action.changePassword'|trans }}
         </a>
     </div>
-
 {% endblock %}
