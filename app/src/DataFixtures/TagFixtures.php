@@ -9,7 +9,7 @@ use App\Entity\Tag;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class TagFixtures
+ * Class TagFixtures.
  */
 class TagFixtures extends AbstractBaseFixtures
 {

@@ -7,11 +7,10 @@ namespace App\Form;
 
 use App\Entity\Answer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 /**
  * Class AnswerType.
@@ -22,9 +21,9 @@ class AnswerType extends AbstractType
      * Builds the form.
      *
      * @param \Symfony\Component\Form\FormBuilderInterface $builder The form builder
-     * @param array $options the options
+     * @param array                                        $options the options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options):void
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add(
             'text',
@@ -54,8 +53,6 @@ class AnswerType extends AbstractType
                 'attr' => ['max_length' => 64],
             ]
         );
-
-
     }
 
     /**

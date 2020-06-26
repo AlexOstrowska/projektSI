@@ -8,8 +8,8 @@ namespace App\Entity;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -67,7 +67,6 @@ class Category
      *     length=64,
      * )
      *
-     *
      * )
      */
     private $title;
@@ -87,13 +86,11 @@ class Category
      *     length=64,
      * )
      *
-     *
      * )
      *
      * @Gedmo\Slug(fields={"title"})
      */
     private $code;
-
 
     public function __construct()
     {

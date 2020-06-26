@@ -3,16 +3,19 @@
 namespace App\Entity;
 
 use App\Repository\QuestionRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use DateTimeInterface;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=QuestionRepository::class)
  * @ORM\Table(name="questions")
+ *
+ * @UniqueEntity(fields={"title"})
  */
 class Question
 {
@@ -31,13 +34,12 @@ class Question
      * Created at.
      *
      * @var DateTimeInterface
-
+     *
      * @ORM\Column(type="datetime")
      *
-     *@Assert\DateTime
+     * @Assert\DateTime
      *
      * @Gedmo\Timestampable(on="create")
-
      */
     private $createdAt;
 
@@ -47,6 +49,13 @@ class Question
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
+     * @Assert\Type(type="string")
+     * @Assert\Length(
+     *     min="3",
+     *     max="255",
+     * )
      */
     private $title;
 
@@ -55,6 +64,7 @@ class Question
      *
      * @ORM\Column(type="string", length=255)
      *
+     * @Assert\NotBlank
      * @Assert\Type(type="string")
      * @Assert\Length(
      *     min="2",
@@ -66,12 +76,17 @@ class Question
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="questions")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\Type(type="App\Entity\Category")
      */
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="question")
-     * 
+     * @ORM\OneToMany(targetEntity=Answer::class, mappedBy="question", orphanRemoval=true)
+     *
+     * @Assert\All({
+     *   @Assert\Type(type="App\Entity\Answer")
+     * })
      */
     private $answers;
 
@@ -86,12 +101,28 @@ class Question
      *     orphanRemoval=true
      * )
      * @ORM\JoinTable(name="questions_tag")
+     *
+     *  @Assert\All({
+     *   @Assert\Type(type="App\Entity\Tag")
+     * })
      */
     private $tag;
 
     /**
-     * Question constructor.
+     *  Updated at.
      *
+     * @var DateTimeInterface
+     *
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\DateTime
+     *
+     * @Gedmo\Timestampable(on="update")
+     */
+    private $updatedAt;
+
+    /**
+     * Question constructor.
      */
     public function __construct()
     {
@@ -161,6 +192,7 @@ class Question
     {
         return $this->answers;
     }
+
     /**
      * Add answer to collection.
      *
@@ -216,6 +248,18 @@ class Question
         if ($this->tag->contains($tag)) {
             $this->tag->removeElement($tag);
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

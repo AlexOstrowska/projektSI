@@ -34,43 +34,35 @@ class AnswerService
     /**
      * Save answer.
      *
-     * @param Answer $answer
-     * @param Question $question
-     *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function save(Answer $answer, Question $question): void
     {
-        if($answer instanceof  Answer){
-            if ($question instanceof Question){
-
-
-                    $answer->setQuestion($question);
-                    $this->AnswerRepository->save($answer);
-
+        if ($answer instanceof  Answer) {
+            if ($question instanceof Question) {
+                $answer->setQuestion($question);
+                $this->AnswerRepository->save($answer);
             }
         }
     }
+
     /**
      * Save Favanswer.
-     *
-     * @param Answer $answer
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function saveFav(Answer $answer): void
     {
-        if($answer instanceof  Answer){
-                $this->AnswerRepository->saveFav($answer);
+        if ($answer instanceof  Answer) {
+            $this->AnswerRepository->saveFav($answer);
         }
     }
 
     /**
      * Delete answer.
      *
-     * @param Answer $answer
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */

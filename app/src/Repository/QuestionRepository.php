@@ -5,12 +5,12 @@
 
 namespace App\Repository;
 
-use App\Entity\Question;
 use App\Entity\Category;
+use App\Entity\Question;
 use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class QuestionRepository.
@@ -82,10 +82,10 @@ class QuestionRepository extends ServiceEntityRepository
     {
         $queryBuilder = $this->getOrCreateQueryBuilder()
         ->select(
-        'partial Question.{id, createdAt, title, text}',
-               'partial category.{id, title}',
-               'partial tag.{id, title}'
-    )
+            'partial Question.{id, createdAt, title, text}',
+            'partial category.{id, title}',
+            'partial tag.{id, title}'
+        )
         ->join('Question.category', 'category')
         ->leftjoin('Question.tag', 'tag')
         ->orderBy('Question.createdAt', 'DESC');
@@ -113,8 +113,10 @@ class QuestionRepository extends ServiceEntityRepository
             $queryBuilder->andWhere('tag IN (:tag)')
                 ->setParameter('tag', $filters['tag']);
         }
+
         return $queryBuilder;
     }
+
     /**
      * Get or create new query builder.
      *
@@ -126,5 +128,4 @@ class QuestionRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('Question');
     }
-
 }

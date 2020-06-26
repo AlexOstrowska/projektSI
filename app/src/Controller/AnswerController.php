@@ -2,19 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Question;
 use App\Entity\Answer;
+use App\Entity\Question;
 use App\Form\AnswerType;
 use App\Form\FavouriteType;
-use App\Repository\AnswerRepository;
 use App\Service\AnswerService;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 /**
  * Answer controller.
@@ -30,7 +28,6 @@ class AnswerController extends AbstractController
 
     /**
      * AnswerController constructor.
-     * @param AnswerService $AnswerService
      */
     public function __construct(AnswerService $AnswerService)
     {
@@ -40,8 +37,8 @@ class AnswerController extends AbstractController
     /**
      * Add Answer action.
      *
-     * @param Symfony\Component\HttpFoundation\Request $request           HTTP request
-     * @param App\Entity\Question                       $question           Question entity selected by id param form URL
+     * @param Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param App\Entity\Question                      $question Question entity selected by id param form URL
      *
      * @return Response HTTP Resposne
      *
@@ -50,16 +47,16 @@ class AnswerController extends AbstractController
      *     name="add_answer",
      *     methods={"GET", "POST"}
      *     )
-     *
-     *
      */
     public function add(Request $request, Question $question): Response
     {
         $answer = new Answer();
+
         $form = $this->createForm(AnswerType::class, $answer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $answer->setfavourite('0');
             $this->AnswerService->save($answer, $question);
 
             return $this->redirectToRoute('Question_show', ['id' => $question->getId()]);
@@ -75,12 +72,10 @@ class AnswerController extends AbstractController
     }
 
     /**
-     * DELETE ANSWER
+     * DELETE ANSWER.
      *
      * @param Request $request http request
-     * @param Answer $answer answer entity
-     *
-     * @return Response
+     * @param Answer  $answer  answer entity
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
@@ -117,11 +112,12 @@ class AnswerController extends AbstractController
             ]
         );
     }
+
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
-     * @param \App\Entity\Answer                      $answer Answer entity
+     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
+     * @param \App\Entity\Answer                        $answer  Answer entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *

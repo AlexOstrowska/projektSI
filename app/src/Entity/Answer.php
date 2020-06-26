@@ -4,9 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AnswerRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 
 /**
  * @ORM\Entity(repositoryClass=AnswerRepository::class)
@@ -23,7 +21,8 @@ class Answer
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\Type("string")
+     *
+     * @Assert\Type("string")
      * @Assert\NotBlank
      * @Assert\Length(
      *     min="2",
@@ -35,11 +34,25 @@ class Answer
     /**
      * @ORM\ManyToOne(targetEntity=Question::class, inversedBy="answers")
      * @ORM\JoinColumn(nullable=false)
+     *
+     * @Assert\Type(type="App\Entity\Question")
      */
     private $question;
 
     /**
      * @ORM\Column(type="string", length=180)
+     *
+     * @Assert\Regex(
+     *    pattern="/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/",
+     *    message="not_valid_email"
+     * )
+     *
+     * @Assert\Email(
+     *     strict=false,
+     *     message="invalid"
+     * )
+     *
+     * @var string
      */
     private $email;
 
@@ -51,9 +64,7 @@ class Answer
     /**
      * @ORM\Column(type="integer", options={"default" : 0})
      *
-     *@Assert\Type(type="integer")
-     *
-     *
+     * @Assert\Type(type="integer")
      */
     private $favourite;
 
@@ -61,7 +72,6 @@ class Answer
     {
         return $this->id;
     }
-
 
     public function getText(): ?string
     {

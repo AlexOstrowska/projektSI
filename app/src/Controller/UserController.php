@@ -54,10 +54,8 @@ class UserController extends AbstractController
     /**
      * ChangePassword action.
      *
-     * @param Request                      $request         HTTP request
-     * @param User                         $user
-     * @param UserRepository               $repository      User repository
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param Request        $request    HTTP request
+     * @param UserRepository $repository User repository
      *
      * @return Response HTTP response
      *
@@ -70,11 +68,9 @@ class UserController extends AbstractController
      *     requirements={"id": "[1-9]\d*"},
      *     name="user_password",
      * )
-     *
      */
     public function changePassword(Request $request, User $user, UserRepository $repository, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-
         if ($user !== $this->getUser()) {
             $this->addFlash('warning', 'message.forbidden');
 

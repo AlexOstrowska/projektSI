@@ -25,9 +25,9 @@ class QuestionFixtures extends AbstractBaseFixtures implements DependentFixtureI
             $Question = new Question();
             $Question->setTitle($this->faker->sentence);
             $Question->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $Question->setupdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
             $Question->setText($this->faker->text);
             $Question->setCategory($this->getRandomReference('categories'));
-
 
             $tags = $this->getRandomReferences(
                 'tag',

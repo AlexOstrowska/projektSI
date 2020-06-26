@@ -7,7 +7,6 @@ namespace App\Service;
 
 use App\Entity\Question;
 use App\Repository\QuestionRepository;
-use App\Service\TagService;
 use Knp\Component\Pager\Pagination\PaginationInterface;
 use Knp\Component\Pager\PaginatorInterface;
 
@@ -48,7 +47,7 @@ class QuestionService
      *
      * @param \App\Repository\QuestionRepository      $QuestionRepository Question repository
      * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
-     * @param \App\Service\CategoryService            $categoryService Category service
+     * @param \App\Service\CategoryService            $categoryService    Category service
      */
     public function __construct(QuestionRepository $QuestionRepository, PaginatorInterface $paginator, CategoryService $categoryService, TagService $tagService)
     {
@@ -61,7 +60,7 @@ class QuestionService
     /**
      * Create paginated list.
      *
-     * @param int $page Page number
+     * @param int   $page    Page number
      * @param array $filters Filters array
      *
      * @return \Knp\Component\Pager\Pagination\PaginationInterface Paginated list
@@ -69,6 +68,7 @@ class QuestionService
     public function createPaginatedList(int $page, array $filters = []): PaginationInterface
     {
         $filters = $this->prepareFilters($filters);
+
         return $this->paginator->paginate(
             $this->QuestionRepository->queryAll($filters),
             $page,

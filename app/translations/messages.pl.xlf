@@ -189,16 +189,28 @@
                 <target>Edytuj kategorie</target>
             </trans-unit>
 
+            <trans-unit id="Favourite">
+                <source>Favourite</source>
+                <target>Najlepszy?</target>
+            </trans-unit>
             <trans-unit id="title_change_password">
                 <source>title_change_password</source>
                 <target>Zmień haslo</target>
             </trans-unit>
+            <trans-unit id="answer deleted">
+                <source>answer deleted</source>
+                <target>Usunięto</target>
+            </trans-unit>
+
 
             <trans-unit id="message_updated_successfully">
                 <source>message_updated_successfully</source>
                 <target>Udało się zmodyfikować</target>
             </trans-unit>
-
+            <trans-unit id="not_valid_email">
+                <source>not_valid_email</source>
+                <target>Podaj poprawdny format email</target>
+            </trans-unit>
             <trans-unit id="message_password_updated_successfully">
                 <source>message_password_updated_successfully</source>
                 <target>Hasło zostało zmienone</target>

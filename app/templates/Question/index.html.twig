@@ -17,6 +17,7 @@
             <tr>
                 <th>{{  'label_id'|trans  }}</th>
                 <th>{{ 'label_created_at'|trans }}</th>
+                <th>{{ 'label_updated_at'|trans }}</th>
                 <th>{{ 'label_title'|trans}}</th>
                 <th>{{ 'label_content'|trans}}</th>
                 <th>{{ knp_pagination_sortable(pagination, 'label_category'|trans, 'category.title') }}</th>
@@ -29,6 +30,7 @@
                 <tr>
                     <td>{{ question.id }}</td>
                     <td>{{ question.createdAt|format_date('long') }}</td>
+                    <td>{{ question.updatedAt|format_date('long') }}</td>
                     <td>{{ question.title }}</td>
                     <td>{{ question.text|slice(0, 100) ~ '...'  }}</td>
                     <td>

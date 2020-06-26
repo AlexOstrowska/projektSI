@@ -10,7 +10,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
 /**
- * Class AnswerFixtures
+ * Class AnswerFixtures.
  */
 class AnswerFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
@@ -19,13 +19,14 @@ class AnswerFixtures extends AbstractBaseFixtures implements DependentFixtureInt
      */
     protected function loadData(ObjectManager $manager): void
     {
-        $this->createMany(20, 'answer', function ($i){
+        $this->createMany(20, 'answer', function ($i) {
             $answer = new Answer();
             $answer->setName($this->faker->firstName);
             $answer->setText($this->faker->sentence);
             $answer->setEmail(sprintf('user%d@example.com', $i));
             $answer->setQuestion($this->getRandomReference('questions'));
             $answer->setFavourite(sprintf('0', $i));
+
             return $answer;
         });
 
@@ -42,7 +43,6 @@ class AnswerFixtures extends AbstractBaseFixtures implements DependentFixtureInt
     {
         return [
             QuestionFixtures::class,
-
         ];
     }
 }

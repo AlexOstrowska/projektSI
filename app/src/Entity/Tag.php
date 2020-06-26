@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TagRepository")
  * @ORM\Table(name="tag")
+ *
  * @UniqueEntity(fields={"title"})
  */
 class Tag
@@ -51,7 +52,6 @@ class Tag
      * @var \Doctrine\Common\Collections\ArrayCollection|\App\Entity\Question[] Questions
      *
      * @ORM\ManyToMany(targetEntity="App\Entity\Question", mappedBy="tag")
-     *
      */
     private $questions;
 

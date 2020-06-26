@@ -8,7 +8,6 @@ namespace App\Controller;
 use App\Entity\Question;
 use App\Form\QuestionType;
 use App\Service\QuestionService;
-use App\Repository\AnswerRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
@@ -30,9 +29,6 @@ class QuestionController extends AbstractController
      */
     private $QuestionService;
 
-
-
-
     /**
      * QuestionController constructor.
      *
@@ -41,8 +37,6 @@ class QuestionController extends AbstractController
     public function __construct(QuestionService $QuestionService)
     {
         $this->QuestionService = $QuestionService;
-
-
     }
 
     /**
@@ -58,14 +52,12 @@ class QuestionController extends AbstractController
      *     name="Question_index",
      *
      * )
-     *
      */
     public function index(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
         $pagination = $this->QuestionService->createPaginatedList(
             $page,
-
             $request->query->getAlnum('filters', [])
         );
 
@@ -88,7 +80,6 @@ class QuestionController extends AbstractController
      *     name="Question_show",
      *     requirements={"id": "[1-9]\d*"},
      * )
-     *
      */
     public function show(question $question): Response
     {
@@ -137,8 +128,8 @@ class QuestionController extends AbstractController
     /**
      * Edit action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Entity\Question $question Question entity
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Question                      $question Question entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -178,8 +169,8 @@ class QuestionController extends AbstractController
     /**
      * Delete action.
      *
-     * @param \Symfony\Component\HttpFoundation\Request $request HTTP request
-     * @param \App\Entity\Question $question Question entity
+     * @param \Symfony\Component\HttpFoundation\Request $request  HTTP request
+     * @param \App\Entity\Question                      $question Question entity
      *
      * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
@@ -219,5 +210,4 @@ class QuestionController extends AbstractController
             ]
         );
     }
-
 }

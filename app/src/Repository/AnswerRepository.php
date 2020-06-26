@@ -2,12 +2,13 @@
 /**
  * Answer repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Answer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * Class AnswerRepository.
@@ -42,6 +43,7 @@ class AnswerRepository extends ServiceEntityRepository
         $this->_em->persist($answer);
         $this->_em->flush($answer);
     }
+
     /**
      * SaveFav record.
      *
@@ -55,6 +57,7 @@ class AnswerRepository extends ServiceEntityRepository
         $this->_em->persist($answer);
         $this->_em->flush($answer);
     }
+
     /**
      * Delete record.
      *
@@ -78,12 +81,11 @@ class AnswerRepository extends ServiceEntityRepository
     {
         return $this->getOrCreateQueryBuilder()
             ->select(
-                'answer.{id, text , email, name}',
-
+                'partial answer.{id, text , email, name, favourite}',
             )
-
             ->orderBy('answer.favourite', 'DESC');
     }
+
     /**
      * Get or create new query builder.
      *

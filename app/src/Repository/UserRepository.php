@@ -38,10 +38,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush();
     }
+
     /**
      * Save record.
-     *
-     * @param User $user
      *
      * @throws ORMException
      * @throws OptimisticLockException
@@ -51,6 +50,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->_em->persist($user);
         $this->_em->flush($user);
     }
+
     /**
      * Get or create new query builder.
      *
@@ -62,7 +62,6 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     {
         return $queryBuilder ?: $this->createQueryBuilder('u');
     }
-
 
     // /**
     //  * @return User[] Returns an array of User objects

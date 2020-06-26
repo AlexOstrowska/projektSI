@@ -45,6 +45,7 @@ class TagService
      * Find tag by title.
      *
      * @param string $title Tag title
+     *
      * @return \App\Entity\Tag|null Tag entity
      */
     public function findOneByTitle(string $title): ?Tag
@@ -56,6 +57,7 @@ class TagService
      * Find tag by id.
      *
      * @param int $id Tag id
+     *
      * @return \App\Entity\Tag|null Tag entity
      */
     public function findOneById(int $id): ?Tag
@@ -84,7 +86,7 @@ class TagService
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function delete(Tag $tag):void
+    public function delete(Tag $tag): void
     {
         $this->tagRepository->delete($tag);
     }

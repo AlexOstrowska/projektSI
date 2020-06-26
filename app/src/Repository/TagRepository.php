@@ -2,6 +2,7 @@
 /**
  * Tag repository.
  */
+
 namespace App\Repository;
 
 use App\Entity\Tag;
@@ -28,8 +29,6 @@ class TagRepository extends ServiceEntityRepository
 
     /**
      * TagRepository constructor.
-     *
-     * @param \Doctrine\Persistence\ManagerRegistry $registry
      */
     public function __construct(ManagerRegistry $registry)
     {
@@ -64,7 +63,6 @@ class TagRepository extends ServiceEntityRepository
         $this->_em->flush($tag);
     }
 
-
     /**
      * Query all records.
      *
@@ -87,5 +85,4 @@ class TagRepository extends ServiceEntityRepository
     {
         return $queryBuilder ?? $this->createQueryBuilder('tag');
     }
-
 }
