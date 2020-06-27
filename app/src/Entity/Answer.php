@@ -42,7 +42,6 @@ class Answer
     /**
      * @ORM\Column(type="string", length=180)
      *
-     *
      * @Assert\Email(
      *     strict=false,
      *     message="invalid"

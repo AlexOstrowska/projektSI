@@ -7,7 +7,6 @@ use App\Entity\Question;
 use App\Form\AnswerType;
 use App\Form\FavouriteType;
 use App\Service\AnswerService;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\HttpFoundation\Request;
@@ -85,7 +84,6 @@ class AnswerController extends AbstractController
      *     name="answer_delete",
      *     methods={"GET", "DELETE"}
      *     )
-     *
      */
     public function delete(Request $request, Answer $answer): Response
     {

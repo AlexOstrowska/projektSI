@@ -7,7 +7,6 @@ namespace App\Repository;
 
 use App\Entity\Answer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -71,6 +70,4 @@ class AnswerRepository extends ServiceEntityRepository
         $this->_em->remove($answer);
         $this->_em->flush($answer);
     }
-
-   
 }
