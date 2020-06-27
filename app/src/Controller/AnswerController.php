@@ -1,4 +1,7 @@
 <?php
+/**
+ * Answer controller.
+ */
 
 namespace App\Controller;
 
@@ -21,6 +24,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class AnswerController extends AbstractController
 {
     /**
+     * Answer service
+     *
      * @var App\Service\AnswerService
      */
     private $answerService;
@@ -78,6 +83,8 @@ class AnswerController extends AbstractController
      *
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
+     *
+     * @return \Symfony\Component\HttpFoundation\Response HTTP response
      *
      * @Route(
      *     "/delete/{id}",

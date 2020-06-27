@@ -22,12 +22,12 @@ class QuestionFixtures extends AbstractBaseFixtures implements DependentFixtureI
     public function loadData(ObjectManager $manager): void
     {
         $this->createMany(50, 'questions', function ($i) {
-            $Question = new Question();
-            $Question->setTitle($this->faker->sentence);
-            $Question->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $Question->setupdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
-            $Question->setText($this->faker->text);
-            $Question->setCategory($this->getRandomReference('categories'));
+            $question = new Question();
+            $question->setTitle($this->faker->sentence);
+            $question->setCreatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $question->setupdatedAt($this->faker->dateTimeBetween('-100 days', '-1 days'));
+            $question->setText($this->faker->text);
+            $question->setCategory($this->getRandomReference('categories'));
 
             $tags = $this->getRandomReferences(
                 'tag',
@@ -35,10 +35,10 @@ class QuestionFixtures extends AbstractBaseFixtures implements DependentFixtureI
             );
 
             foreach ($tags as $tag) {
-                $Question->addTag($tag);
+                $question->addTag($tag);
             }
 
-            return $Question;
+            return $question;
         });
 
         $manager->flush();

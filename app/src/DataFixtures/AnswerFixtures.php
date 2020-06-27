@@ -15,6 +15,19 @@ use Doctrine\Persistence\ObjectManager;
 class AnswerFixtures extends AbstractBaseFixtures implements DependentFixtureInterface
 {
     /**
+    * This method must return an array of fixtures classes
+    * on which the implementing class depends on.
+    *
+     * @return array Array of dependencies
+    */
+    public function getDependencies(): array
+    {
+        return [
+            QuestionFixtures::class,
+        ];
+    }
+
+    /**
      * Load data.
      */
     protected function loadData(ObjectManager $manager): void
@@ -31,18 +44,5 @@ class AnswerFixtures extends AbstractBaseFixtures implements DependentFixtureInt
         });
 
         $manager->flush();
-    }
-
-    /**
-     * This method must return an array of fixtures classes
-     * on which the implementing class depends on.
-     *
-     * @return array Array of dependencies
-     */
-    public function getDependencies(): array
-    {
-        return [
-            QuestionFixtures::class,
-        ];
     }
 }

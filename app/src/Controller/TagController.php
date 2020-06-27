@@ -26,8 +26,17 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class TagController extends AbstractController
 {
+    /**
+     * Tag service.
+     *
+     * @var \App\Service\TagService
+     */
     private $tagService;
-
+    /**
+     * TagController constructor.
+     *
+     * @param \App\Service\TagService $tagService Tag service
+     */
     public function __construct(TagService $tagService)
     {
         $this->tagService = $tagService;
@@ -52,14 +61,6 @@ class TagController extends AbstractController
     {
         $page = $request->query->getInt('page', 1);
         $pagination = $this->tagService->createPaginatedList($page);
-        /*
-        $pagination = $paginator->paginate(
-            $tagRepository->queryAll(),
-            $request->query->getInt('page', 1),
-            TagRepository::PAGINATOR_ITEMS_PER_PAGE
-        );
-        */
-
         return $this->render(
             'tag/index.html.twig',
             ['pagination' => $pagination]

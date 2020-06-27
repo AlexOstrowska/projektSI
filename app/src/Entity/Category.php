@@ -189,7 +189,6 @@ class Category
     {
         if ($this->questions->contains($question)) {
             $this->questions->removeElement($question);
-            // set the owning side to null (unless already changed)
             if ($question->getCategory() === $this) {
                 $question->setCategory(null);
             }
