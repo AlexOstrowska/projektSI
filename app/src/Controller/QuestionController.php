@@ -27,16 +27,16 @@ class QuestionController extends AbstractController
      *
      * @var \App\Service\QuestionService
      */
-    private $QuestionService;
+    private $questionService;
 
     /**
      * QuestionController constructor.
      *
-     * @param \App\Service\QuestionService $QuestionService Question service
+     * @param \App\Service\QuestionService $questionService Question service
      */
-    public function __construct(QuestionService $QuestionService)
+    public function __construct(QuestionService $questionService)
     {
-        $this->QuestionService = $QuestionService;
+        $this->questionService = $questionService;
     }
 
     /**
@@ -56,7 +56,7 @@ class QuestionController extends AbstractController
     public function index(Request $request): Response
     {
         $page = $request->query->getInt('page', 1);
-        $pagination = $this->QuestionService->createPaginatedList(
+        $pagination = $this->questionService->createPaginatedList(
             $page,
             $request->query->getAlnum('filters', [])
         );
@@ -113,7 +113,7 @@ class QuestionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->QuestionService->save($question);
+            $this->questionService->save($question);
             $this->addFlash('success', 'message_created_successfully');
 
             return $this->redirectToRoute('Question_index');
@@ -151,7 +151,7 @@ class QuestionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->QuestionService->save($question);
+            $this->questionService->save($question);
             $this->addFlash('success', 'message_updated_successfully');
 
             return $this->redirectToRoute('Question_index');
@@ -196,7 +196,7 @@ class QuestionController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->QuestionService->delete($question);
+            $this->questionService->delete($question);
             $this->addFlash('success', 'message_deleted_successfully');
 
             return $this->redirectToRoute('Question_index');

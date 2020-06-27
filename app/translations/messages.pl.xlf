@@ -193,6 +193,11 @@
                 <source>Favourite</source>
                 <target>Najlepszy?</target>
             </trans-unit>
+
+            <trans-unit id="favourite_answer">
+                <source>favourite_answer</source>
+                <target>Najlepsze odpowiedzie</target>
+            </trans-unit>
             <trans-unit id="title_change_password">
                 <source>title_change_password</source>
                 <target>Zmień haslo</target>

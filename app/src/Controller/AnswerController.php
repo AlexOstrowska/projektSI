@@ -24,14 +24,14 @@ class AnswerController extends AbstractController
     /**
      * @var App\Service\AnswerService
      */
-    private $AnswerService;
+    private $answerService;
 
     /**
      * AnswerController constructor.
      */
-    public function __construct(AnswerService $AnswerService)
+    public function __construct(AnswerService $answerService)
     {
-        $this->AnswerService = $AnswerService;
+        $this->answerService = $answerService;
     }
 
     /**
@@ -57,7 +57,7 @@ class AnswerController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $answer->setfavourite('0');
-            $this->AnswerService->save($answer, $question);
+            $this->answerService->save($answer, $question);
 
             return $this->redirectToRoute('Question_show', ['id' => $question->getId()]);
         }
@@ -86,7 +86,6 @@ class AnswerController extends AbstractController
      *     methods={"GET", "DELETE"}
      *     )
      *
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('DELETE', answer)")
      */
     public function delete(Request $request, Answer $answer): Response
     {
@@ -98,7 +97,7 @@ class AnswerController extends AbstractController
         }
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->AnswerService->delete($answer);
+            $this->answerService->delete($answer);
             $this->addFlash('success', 'answer deleted');
 
             return $this->redirectToRoute('Question_index');
@@ -137,7 +136,7 @@ class AnswerController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->AnswerService->saveFav($answer);
+            $this->answerService->saveFav($answer);
             $this->addFlash('success', 'message_updated_successfully');
 
             return $this->redirectToRoute('Question_index');

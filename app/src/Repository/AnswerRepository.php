@@ -72,29 +72,5 @@ class AnswerRepository extends ServiceEntityRepository
         $this->_em->flush($answer);
     }
 
-    /**
-     * Query all records.
-     *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
-     */
-    public function queryAll(): QueryBuilder
-    {
-        return $this->getOrCreateQueryBuilder()
-            ->select(
-                'partial answer.{id, text , email, name, favourite}',
-            )
-            ->orderBy('answer.favourite', 'DESC');
-    }
-
-    /**
-     * Get or create new query builder.
-     *
-     * @param \Doctrine\ORM\QueryBuilder|null $queryBuilder Query builder
-     *
-     * @return \Doctrine\ORM\QueryBuilder Query builder
-     */
-    private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
-    {
-        return $queryBuilder ?? $this->createQueryBuilder('answer');
-    }
+   
 }

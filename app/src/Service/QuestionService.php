@@ -20,7 +20,7 @@ class QuestionService
      *
      * @var \App\Repository\QuestionRepository
      */
-    private $QuestionRepository;
+    private $questionRepository;
 
     /**
      * Paginator.
@@ -45,13 +45,13 @@ class QuestionService
     /**
      * QuestionService constructor.
      *
-     * @param \App\Repository\QuestionRepository      $QuestionRepository Question repository
+     * @param \App\Repository\QuestionRepository      $questionRepository Question repository
      * @param \Knp\Component\Pager\PaginatorInterface $paginator          Paginator
      * @param \App\Service\CategoryService            $categoryService    Category service
      */
-    public function __construct(QuestionRepository $QuestionRepository, PaginatorInterface $paginator, CategoryService $categoryService, TagService $tagService)
+    public function __construct(QuestionRepository $questionRepository, PaginatorInterface $paginator, CategoryService $categoryService, TagService $tagService)
     {
-        $this->QuestionRepository = $QuestionRepository;
+        $this->questionRepository = $questionRepository;
         $this->paginator = $paginator;
         $this->categoryService = $categoryService;
         $this->tagService = $tagService;
@@ -70,7 +70,7 @@ class QuestionService
         $filters = $this->prepareFilters($filters);
 
         return $this->paginator->paginate(
-            $this->QuestionRepository->queryAll($filters),
+            $this->questionRepository->queryAll($filters),
             $page,
             QuestionRepository::PAGINATOR_ITEMS_PER_PAGE
         );
@@ -86,7 +86,7 @@ class QuestionService
      */
     public function save(question $question): void
     {
-        $this->QuestionRepository->save($question);
+        $this->questionRepository->save($question);
     }
 
     /**
@@ -99,7 +99,7 @@ class QuestionService
      */
     public function delete(question $question): void
     {
-        $this->QuestionRepository->delete($question);
+        $this->questionRepository->delete($question);
     }
 
     /**

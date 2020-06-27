@@ -42,10 +42,6 @@ class Answer
     /**
      * @ORM\Column(type="string", length=180)
      *
-     * @Assert\Regex(
-     *    pattern="/^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/",
-     *    message="not_valid_email"
-     * )
      *
      * @Assert\Email(
      *     strict=false,

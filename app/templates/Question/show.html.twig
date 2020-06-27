@@ -27,8 +27,25 @@
 
         </dl>
       <div class="answer">
-            <h3>{{ 'title_answer'|trans }}</h3>
 
+          <h3>{{ 'title_answer'|trans }}</h3>
+
+          <table class="table">
+              <thead class="thead-light">
+              <tr>
+                  <th>{{ 'favourite_answer'|trans  }}</th>
+              </tr>
+              </thead>
+              <tbody>
+              {% for answer in question.answers %}
+                  {% if answer.favourite == 1 %}
+                     <tr>
+                         <td>{{ answer.text }}</td>
+                     </tr>
+                  {% endif %}
+              {% endfor %}
+              </tbody>
+          </table>
                    <a class="btn btn-primary" href={{ url('add_answer', {"id": question.id})}} >Dodaj odpowiedz</a>
           <table class="table table-hover">
               <thead>

@@ -19,7 +19,7 @@ class AnswerService
      *
      * @var \App\Repository\AnswerRepository
      */
-    private $AnswerRepository;
+    private $answerRepository;
 
     /**
      * AnswerService constructor.
@@ -28,7 +28,7 @@ class AnswerService
      */
     public function __construct(AnswerRepository $answerRepository)
     {
-        $this->AnswerRepository = $answerRepository;
+        $this->answerRepository = $answerRepository;
     }
 
     /**
@@ -42,7 +42,7 @@ class AnswerService
         if ($answer instanceof  Answer) {
             if ($question instanceof Question) {
                 $answer->setQuestion($question);
-                $this->AnswerRepository->save($answer);
+                $this->answerRepository->save($answer);
             }
         }
     }
@@ -56,7 +56,7 @@ class AnswerService
     public function saveFav(Answer $answer): void
     {
         if ($answer instanceof  Answer) {
-            $this->AnswerRepository->saveFav($answer);
+            $this->answerRepository->saveFav($answer);
         }
     }
 
@@ -68,6 +68,6 @@ class AnswerService
      */
     public function delete(Answer $answer): void
     {
-        $this->AnswerRepository->delete($answer);
+        $this->answerRepository->delete($answer);
     }
 }
