@@ -63,15 +63,32 @@ class Answer
      */
     private $favourite;
 
+    /**
+     * Getter for Id
+     *
+     * @return int|null Result
+     */
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /*
+     * Getter for Text
+     *
+     * @return string|null Text
+     */
     public function getText(): ?string
     {
         return $this->text;
     }
+
+    /*
+     * Setter for text
+     *
+     * @param string $text Text
+     */
 
     public function setText(string $text): self
     {
@@ -80,11 +97,18 @@ class Answer
         return $this;
     }
 
+    /*
+     * Getter for Question
+     */
+
     public function getQuestion(): ?Question
     {
         return $this->question;
     }
 
+    /*
+     * Setter for Questions
+     */
     public function setQuestion(?Question $question): self
     {
         $this->question = $question;
@@ -92,11 +116,21 @@ class Answer
         return $this;
     }
 
+    /*
+     * Getter for Email
+     *
+     * @return string|null Email
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /*
+     * Setter for Email
+     *
+     * @param string $email Email
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -104,11 +138,18 @@ class Answer
         return $this;
     }
 
+    /*
+     * Getter for name
+     */
+
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /*
+     * Setter for name
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -116,10 +157,18 @@ class Answer
         return $this;
     }
 
+    /*
+     * Getter for Favourite
+     */
+
     public function getFavourite(): ?int
     {
         return $this->favourite;
     }
+
+    /*
+     * Setter for Favourite
+     */
 
     public function setFavourite(int $favourite): self
     {
